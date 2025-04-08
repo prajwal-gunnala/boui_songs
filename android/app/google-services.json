@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "592118847989",
+    "project_id": "boui-songs-4be1e",
+    "storage_bucket": "boui-songs-4be1e.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:592118847989:android:aaf0c3d80b28351e0668bc",
+        "android_client_info": {
+          "package_name": "com.boui.songs.app.boui_songs"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA4Ld9B6wQNw9Xu0hVsdKCOdskbdafCf-U"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
