@@ -5,8 +5,7 @@ import '../components/latest_songs_controller.dart';
 import '../widgets/bottom_nav_bar.dart';
 import '../widgets/mini_music_player.dart';
 import '../controllers/music_player_controller.dart';
-import '../screens/music_player_bottom_sheet.dart'; // <-- Add this line
-
+import '../screens/music_player_bottom_sheet.dart';
 
 class LatestSongsPage extends StatelessWidget {
   const LatestSongsPage({Key? key}) : super(key: key);
@@ -14,6 +13,18 @@ class LatestSongsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final LatestSongsController controller = Get.put(LatestSongsController());
+    final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
+    PersistentBottomSheetController? bottomSheetController;
+
+    void showOrUpdateBottomSheet(Map<String, dynamic> song) {
+      if (bottomSheetController != null) {
+        // Update the content of the existing bottom sheet
+        bottomSheetController!.setState?.call(() {});
+      } else {
+        // Create a new bottom sheet
+        showMusicPlayerBottomSheet(context);
+      }
+    }
 
     return WillPopScope(
       onWillPop: () async {
@@ -21,6 +32,7 @@ class LatestSongsPage extends StatelessWidget {
         return false;
       },
       child: Scaffold(
+        key: scaffoldKey,
         backgroundColor: Colors.black,
         appBar: AppBar(
           backgroundColor: Colors.grey[900],
@@ -67,14 +79,12 @@ class LatestSongsPage extends StatelessWidget {
                   itemBuilder: (context, index) {
                     final song = controller.songs[index];
                     return GestureDetector(
-                     onTap: () {
-  HapticFeedback.selectionClick();
-  final mpController = Get.find<MusicPlayerController>();
-  mpController.loadSong(song); // Fire-and-forget; starts loading asynchronously
-  showMusicPlayerBottomSheet(context); // Immediately open the bottom sheet
-},
-
-
+                      onTap: () {
+                        HapticFeedback.selectionClick();
+                        final mpController = Get.find<MusicPlayerController>();
+                        mpController.loadSong(song);
+                        showOrUpdateBottomSheet(mpController.currentSong.value);
+                      },
                       child: Container(
                         margin: const EdgeInsets.only(bottom: 12),
                         padding: const EdgeInsets.all(12),
@@ -159,13 +169,10 @@ class LatestSongsPage extends StatelessWidget {
                 padding: const EdgeInsets.only(bottom: 8.0),
                 child: GestureDetector(
                   onTap: () {
-  HapticFeedback.selectionClick();
-  final mpController = Get.find<MusicPlayerController>();
-  
-
-  // Instead of going to /player, we show the bottom sheet:
-  showMusicPlayerBottomSheet(context);
-},
+                    HapticFeedback.selectionClick();
+                    final mpController = Get.find<MusicPlayerController>();
+                    showOrUpdateBottomSheet(mpController.currentSong.value);
+                  },
                   child: Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
                     child: MiniMusicPlayer(),
