@@ -228,58 +228,82 @@ class MusicPlayerSheetContent extends StatelessWidget {
 
   /// Lyrics section
   Widget _buildLyricsSection() {
-    return Obx(() {
-      final lyricsText = controller.lyrics.value;
-      if (lyricsText.isEmpty) {
-        // Placeholder for no lyrics
-        return Container(
-          margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-          padding: const EdgeInsets.all(12),
-          decoration: BoxDecoration(
-            color: Colors.deepPurple.shade100.withOpacity(0.2),
-            borderRadius: BorderRadius.circular(20),
-          ),
-          child: const Text(
-            "No lyrics available.",
-            style: TextStyle(
-              color: Colors.white,
-              fontSize: 20,
-              height: 1.5,
-            ),
-            textAlign: TextAlign.center,
-          ),
-        );
-      }
+  return Obx(() {
+    final lyricsText = controller.lyrics.value.trim();
 
+    if (lyricsText.isEmpty) {
       return Container(
         margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
         padding: const EdgeInsets.all(12),
         decoration: BoxDecoration(
-          color: Colors.deepPurple.shade100.withOpacity(0.2),
+          color: const Color.fromARGB(255, 255, 255, 255),
           borderRadius: BorderRadius.circular(20),
+          border: Border.all(color: const Color.fromARGB(255, 248, 248, 248), width: 1.5),
         ),
-        child: SingleChildScrollView(
-          scrollDirection: Axis.horizontal,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                lyricsText,
-                style: const TextStyle(
-                  color: Colors.white,
-                  fontSize: 20,
-                  height: 1.5,
-                ),
-                textAlign: TextAlign.left,
-                softWrap: false, // Prevent automatic wrapping
-                overflow: TextOverflow.visible, // Allow horizontal scrolling
-              ),
-            ],
+        child: const Text(
+          "No lyrics available.",
+          style: TextStyle(
+            color: Colors.white,
+            fontSize: 20,
+            height: 1.5,
           ),
+          textAlign: TextAlign.center,
         ),
       );
-    });
-  }
+    }
+
+    final lines = lyricsText.split('\n');
+
+    return Container(
+      margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+      padding: const EdgeInsets.all(16),
+      decoration: BoxDecoration(
+        color: const Color.fromARGB(255, 198, 193, 193),
+        borderRadius: BorderRadius.circular(20),
+        border: Border.all(
+          color: const Color.fromARGB(255, 157, 242, 67).withOpacity(0.8),
+          width: 2,
+        ),
+        boxShadow: [
+          BoxShadow(
+            color: const Color.fromARGB(255, 255, 255, 255).withOpacity(0.3),
+            blurRadius: 12,
+            offset: const Offset(0, 4),
+          ),
+        ],
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Center(
+  child: const Text(
+    '--------Lyrics---------',
+    style: TextStyle(
+      color: Color.fromARGB(255, 0, 0, 0),
+      fontSize: 25,
+      fontWeight: FontWeight.bold,
+    ),
+  ),
+),
+          const SizedBox(height: 12),
+          ...lines.map((line) => Padding(
+                padding: const EdgeInsets.symmetric(vertical: 4),
+                child: Text(
+                  line,
+                  style: const TextStyle(
+                    color: Color.fromARGB(255, 0, 0, 0),
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                    height: 1.5,
+                  ),
+                ),
+              )),
+        ],
+      ),
+    );
+  });
+}
+
 
   /// The new queue section (using the separate widget)
   Widget _buildQueueSection() {
