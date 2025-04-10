@@ -231,10 +231,10 @@ class MusicPlayerSheetContent extends StatelessWidget {
     return Obx(() {
       final lyricsText = controller.lyrics.value;
       if (lyricsText.isEmpty) {
-        // If you want a placeholder
+        // Placeholder for no lyrics
         return Container(
-          margin: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
-          padding: const EdgeInsets.all(16),
+          margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+          padding: const EdgeInsets.all(12),
           decoration: BoxDecoration(
             color: Colors.deepPurple.shade100.withOpacity(0.2),
             borderRadius: BorderRadius.circular(20),
@@ -250,22 +250,31 @@ class MusicPlayerSheetContent extends StatelessWidget {
           ),
         );
       }
+
       return Container(
-        margin: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
-        padding: const EdgeInsets.all(16),
+        margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+        padding: const EdgeInsets.all(12),
         decoration: BoxDecoration(
           color: Colors.deepPurple.shade100.withOpacity(0.2),
           borderRadius: BorderRadius.circular(20),
         ),
         child: SingleChildScrollView(
-          child: Text(
-            lyricsText,
-            style: const TextStyle(
-              color: Colors.white,
-              fontSize: 20,
-              height: 1.5,
-            ),
-            textAlign: TextAlign.center,
+          scrollDirection: Axis.horizontal,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                lyricsText,
+                style: const TextStyle(
+                  color: Colors.white,
+                  fontSize: 20,
+                  height: 1.5,
+                ),
+                textAlign: TextAlign.left,
+                softWrap: false, // Prevent automatic wrapping
+                overflow: TextOverflow.visible, // Allow horizontal scrolling
+              ),
+            ],
           ),
         ),
       );
