@@ -3,14 +3,8 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import '../controllers/music_player_controller.dart';
 import '../widgets/queue_list_widget.dart';
-
-/// Custom function to show the music player bottom sheet with a smoother transition
 Future<void> showMusicPlayerBottomSheet(BuildContext context) async {
   final MusicPlayerController controller = Get.find();
-
-  // Use PageRouteBuilder for a custom transition or keep showModalBottomSheet 
-  // and adjust the animation controller. Below is a simplified approach using
-  // showModalBottomSheet with a custom transition duration if feasible.
 
   await showModalBottomSheet(
     context: context,
