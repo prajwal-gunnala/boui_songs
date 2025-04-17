@@ -6,39 +6,12 @@ plugins {
 }
 
 android {
-    namespace = "com.boui.songs.app.boui_songs"
-    compileSdk = flutter.compileSdkVersion
-    ndkVersion = "27.0.12077973"
-
-    compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_11
-        targetCompatibility = JavaVersion.VERSION_11
-    }
-
-    kotlinOptions {
-        jvmTarget = JavaVersion.VERSION_11.toString()
-    }
-
-    defaultConfig {
-        applicationId = "com.boui.songs.app.boui_songs"
-        minSdk = flutter.minSdkVersion
-        targetSdk = flutter.targetSdkVersion
-        versionCode = flutter.versionCode
-        versionName = flutter.versionName
-    }
-
-    // 🔐 Load keystore properties
-    val keystorePropsFile = rootProject.file("keystore.properties")
-    val keystoreProps = java.util.Properties().apply {
-        load(keystorePropsFile.inputStream())
-    }
-
     signingConfigs {
         create("release") {
-            storeFile = file(keystoreProps["storeFile"] as String)
-            storePassword = keystoreProps["storePassword"] as String
-            keyAlias = keystoreProps["keyAlias"] as String
-            keyPassword = keystoreProps["keyPassword"] as String
+            storeFile = file(System.getenv("KEYSTORE_FILE_PATH"))
+            storePassword = System.getenv("KEYSTORE_PASSWORD")
+            keyAlias = System.getenv("KEY_ALIAS")
+            keyPassword = System.getenv("KEY_PASSWORD")
         }
     }
 
@@ -51,9 +24,6 @@ android {
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
-        }
-        getByName("debug") {
-            signingConfig = signingConfigs.getByName("release") // Optional, can keep unsigned for debug
         }
     }
 }
