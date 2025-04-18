@@ -53,7 +53,7 @@ class PlaylistsController extends GetxController {
 }
 
 class PlaylistsPage extends StatelessWidget {
-  const PlaylistsPage({Key? key}) : super(key: key);
+  const PlaylistsPage({super.key});
 
   @override
   Widget build(BuildContext context) {

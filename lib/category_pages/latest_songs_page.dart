@@ -8,7 +8,7 @@ import '../controllers/music_player_controller.dart';
 import '../screens/music_player_bottom_sheet.dart';
 
 class LatestSongsPage extends StatelessWidget {
-  const LatestSongsPage({Key? key}) : super(key: key);
+  const LatestSongsPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -17,14 +17,9 @@ class LatestSongsPage extends StatelessWidget {
     PersistentBottomSheetController? bottomSheetController;
 
     void showOrUpdateBottomSheet(Map<String, dynamic> song) {
-      if (bottomSheetController != null) {
-        // Update the content of the existing bottom sheet
-        bottomSheetController!.setState?.call(() {});
-      } else {
-        // Create a new bottom sheet
-        showMusicPlayerBottomSheet(context);
-      }
-    }
+      // Create a new bottom sheet
+      showMusicPlayerBottomSheet(context);
+        }
 
     return WillPopScope(
       onWillPop: () async {

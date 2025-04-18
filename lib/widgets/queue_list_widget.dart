@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import '../controllers/music_player_controller.dart';
 
 class QueueListWidget extends StatefulWidget {
-  QueueListWidget({Key? key}) : super(key: key);
+  const QueueListWidget({super.key});
 
   @override
   _QueueListWidgetState createState() => _QueueListWidgetState();

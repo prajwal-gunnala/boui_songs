@@ -15,9 +15,7 @@ dependencies:
   cloud_firestore: ^4.7.1
   firebase_core: ^2.13.1
   cupertino_icons: ^1.0.8
- # firebase_core: ^2.32.0 
   firebase_auth: ^4.16.0
-#  cloud_firestore: ^4.17.0
   fluttertoast: ^8.2.4
   provider: ^6.0.5
   get: ^4.6.5
@@ -28,7 +26,7 @@ dependencies:
   flutter_launcher_icons: ^0.14.3
   url_launcher: ^6.0.20
   cached_network_image: ^3.4.1
-
+  shimmer: ^3.0.0  # Added for loading effects
 
 dev_dependencies:
   flutter_test:

@@ -11,7 +11,7 @@ import '../widgets/bottom_nav_bar.dart';
 import '../screens/music_player_bottom_sheet.dart';
 
 class SearchPg extends StatefulWidget {
-  const SearchPg({Key? key}) : super(key: key);
+  const SearchPg({super.key});
 
   @override
   _SearchPgState createState() => _SearchPgState();
@@ -106,7 +106,7 @@ class _SearchPgState extends State<SearchPg> with SingleTickerProviderStateMixin
     final QuerySnapshot querySnapshot = await FirebaseFirestore.instance
         .collection(collection)
         .where(field, isGreaterThanOrEqualTo: query)
-        .where(field, isLessThan: query + '\uf8ff')
+        .where(field, isLessThan: '$query\uf8ff')
         .limit(10)
         .get();
 

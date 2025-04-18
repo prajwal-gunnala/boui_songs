@@ -3,13 +3,14 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import '../controllers/music_player_controller.dart';
 import '../screens/music_player_bottom_sheet.dart';
 import '../widgets/bottom_nav_bar.dart';
 import '../widgets/mini_music_player.dart';
 
 class CategoryPage extends StatelessWidget {
-  const CategoryPage({Key? key}) : super(key: key);
+  const CategoryPage({super.key});
 
   String getDirectImageUrl(String? driveUrl) {
     if (driveUrl == null || driveUrl.isEmpty) return "";
@@ -66,9 +67,11 @@ class CategoryPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final Map args = ModalRoute.of(context)!.settings.arguments as Map;
     final Map<String, dynamic> data = args['data'] ?? {};
+    final String type = args['type'] ?? '';
     final String name = data['name'] ?? 'Unknown';
     final String coverImage = getDirectImageUrl(data['cover_image']);
     final List<dynamic> songIds = data['song_ids'] ?? [];
+    final String itemId = data['id'] ?? '';
 
     return Scaffold(
       bottomNavigationBar: const CustomBottomNavBar(),
@@ -105,10 +108,11 @@ class CategoryPage extends StatelessWidget {
                     Positioned.fill(
                       child: ImageFiltered(
                         imageFilter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
-                        child: Image.network(
-                          coverImage,
+                        child: CachedNetworkImage(
+                          imageUrl: coverImage,
                           fit: BoxFit.cover,
-                          errorBuilder: (context, error, stackTrace) => Image.asset(
+                          placeholder: (context, url) => Container(color: Colors.black),
+                          errorWidget: (context, url, error) => Image.asset(
                             "assets/placeholder.png",
                             fit: BoxFit.cover,
                           ),
@@ -136,18 +140,26 @@ class CategoryPage extends StatelessWidget {
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.end,
                           children: [
-                            ClipRRect(
-                              borderRadius: BorderRadius.circular(16),
-                              child: Image.network(
-                                coverImage,
-                                width: 200,
-                                height: 200,
-                                fit: BoxFit.cover,
-                                errorBuilder: (context, error, stackTrace) => Image.asset(
-                                  "assets/placeholder.png",
+                            Hero(
+                              tag: '$type-$itemId',
+                              child: ClipRRect(
+                                borderRadius: BorderRadius.circular(16),
+                                child: CachedNetworkImage(
+                                  imageUrl: coverImage,
                                   width: 200,
                                   height: 200,
                                   fit: BoxFit.cover,
+                                  placeholder: (context, url) => Container(
+                                    width: 200,
+                                    height: 200,
+                                    color: Colors.grey[850],
+                                  ),
+                                  errorWidget: (context, url, error) => Image.asset(
+                                    "assets/placeholder.png",
+                                    width: 200,
+                                    height: 200,
+                                    fit: BoxFit.cover,
+                                  ),
                                 ),
                               ),
                             ),
@@ -216,12 +228,12 @@ class CategoryPage extends StatelessWidget {
                   },
                   leading: ClipRRect(
                     borderRadius: BorderRadius.circular(8),
-                    child: Image.network(
-                      song['image_url'] ?? '',
+                    child: CachedNetworkImage(
+                      imageUrl: song['image_url'] ?? '',
                       width: 50,
                       height: 50,
                       fit: BoxFit.cover,
-                      errorBuilder: (context, error, stackTrace) => Container(
+                      errorWidget: (context, url, error) => Container(
                         width: 50,
                         height: 50,
                         color: Colors.grey,

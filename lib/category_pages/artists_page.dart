@@ -54,7 +54,7 @@ class ArtistsController extends GetxController {
 }
 
 class ArtistsPage extends StatelessWidget {
-  const ArtistsPage({Key? key}) : super(key: key);
+  const ArtistsPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -148,7 +148,7 @@ class ArtistsPage extends StatelessWidget {
 class _ArtistGridItem extends StatelessWidget {
   final Map<String, dynamic> artist;
 
-  const _ArtistGridItem({Key? key, required this.artist}) : super(key: key);
+  const _ArtistGridItem({super.key, required this.artist});
 
   @override
   Widget build(BuildContext context) {

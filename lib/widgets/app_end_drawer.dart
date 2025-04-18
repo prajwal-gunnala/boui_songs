@@ -7,7 +7,7 @@ import '../category_pages/playlists_page.dart';
 import '../category_pages/artists_page.dart';
 
 class AppEndDrawer extends StatelessWidget {
-  const AppEndDrawer({Key? key}) : super(key: key);
+  const AppEndDrawer({super.key});
 
   /// Helper function to navigate with a slide transition.
   void _navigateTo(BuildContext context, Widget page) {

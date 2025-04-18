@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 import '../screens/music_player_bottom_sheet.dart'; // Import the bottom sheet function
 
 class CustomBottomNavBar extends StatelessWidget {
-  const CustomBottomNavBar({Key? key}) : super(key: key);
+  const CustomBottomNavBar({super.key});
 
   int _gci(BuildContext ctx) {
     final r = ModalRoute.of(ctx)?.settings.name;

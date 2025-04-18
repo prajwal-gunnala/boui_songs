@@ -10,5 +10,5 @@ Pfx buildPfx(String t) {
     return Pfx('', String.fromCharCode(0x10FFFF));
   }
   // Use the search term as is with the high Unicode suffix.
-  return Pfx(t, t + '\uf8ff');
+  return Pfx(t, '$t\uf8ff');
 }

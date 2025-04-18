@@ -28,7 +28,7 @@ void main()async{
 }
 
 class BOUISongsApp extends StatelessWidget{
-  const BOUISongsApp({Key?key}):super(key:key);
+  const BOUISongsApp({super.key});
 
   @override
   Widget build(BuildContext ctx){

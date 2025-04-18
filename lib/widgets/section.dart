@@ -11,7 +11,7 @@ class Section extends StatelessWidget {
   final Function(Map<String, dynamic>)? onItemTap;
 
   const Section({
-    Key? key,
+    super.key,
     required this.title,
     required this.items,
     this.isCircular = false,
@@ -19,7 +19,7 @@ class Section extends StatelessWidget {
     this.textAlignment = TextAlign.center,
     this.onViewAll,
     this.onItemTap,
-  }) : super(key: key);
+  });
 
   // Robust image loading method with error handling
   Widget _buildImage({
@@ -36,7 +36,7 @@ class Section extends StatelessWidget {
       borderRadius: BorderRadius.circular(isCircular ? width / 2 : 10),
       child: isValidUrl
           ? Image.network(
-              imageUrl!,
+              imageUrl,
               width: width,
               height: height ?? width,
               fit: fit,
@@ -148,7 +148,7 @@ Widget _buildLatestSongsList(BuildContext context, List<Map<String, dynamic>> it
   // Adjust container height based on your design (e.g. each row ~70 pixels with gaps).
   final containerHeight = 200;
 
-  return Container(
+  return SizedBox(
     height: containerHeight.toDouble(),
     child: SingleChildScrollView(
       scrollDirection: Axis.horizontal,

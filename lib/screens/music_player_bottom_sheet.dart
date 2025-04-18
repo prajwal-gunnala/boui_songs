@@ -30,8 +30,7 @@ Future<void> showMusicPlayerBottomSheet(BuildContext context) async {
 
 class MusicPlayerSheetContent extends StatelessWidget {
   final ScrollController scrollController;
-  MusicPlayerSheetContent({Key? key, required this.scrollController})
-      : super(key: key);
+  MusicPlayerSheetContent({super.key, required this.scrollController});
 
   final MusicPlayerController controller = Get.find();
 

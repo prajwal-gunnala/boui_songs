@@ -6,7 +6,7 @@ import '../screens/music_player_bottom_sheet.dart'; // <-- Add this line
 
 
 class MiniMusicPlayer extends StatelessWidget {
-  const MiniMusicPlayer({Key? key}) : super(key: key);
+  const MiniMusicPlayer({super.key});
 
   String _formatTime(Duration d) {
     String twoDigits(int n) => n.toString().padLeft(2, '0');

@@ -20,7 +20,7 @@ import '../components/latest_songs_controller.dart';
 import '../screens/category.dart';
 
 class HomeScreen extends StatelessWidget {
-  const HomeScreen({Key? key}) : super(key: key);
+  const HomeScreen({super.key});
 
   String getDirectImageUrl(String? driveUrl) {
     if (driveUrl == null || driveUrl.isEmpty) return "";
